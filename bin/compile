@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir>
+
+set -e
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+
+AR_TGZ="$CACHE_DIR/ar-sandbox-buildpack.tgz"
+AR_URL="https://s3-us-west-1.amazonaws.com/ar-sandbox-buildpack/ar-sandbox-buildpack.tgz"
+
+curl -z $AR_TGZ -o $AR_TGZ $AR_URL
+tar -xf $AR_TGZ -C /usr
+
+apt-get update
+apt-get install -y zip imagemagick
+
+exit 0
